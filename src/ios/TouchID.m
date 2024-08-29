@@ -80,7 +80,7 @@ static NSString *const FingerprintDatabaseStateKey = @"FingerprintDatabaseStateK
 	 	self.TAG = (NSString*)[command.arguments objectAtIndex:0];
     NSString* password = (NSString*)[command.arguments objectAtIndex:1];
     @try {
-        self.MyKeychainWrapper = [[KeychainWrapper alloc]init];
+        self.MyKeychainWrapper = [[KeychainWrapper alloc] initWithAccount:self.TAG];
         [self.MyKeychainWrapper mySetObject:password forKey:(__bridge id)(kSecValueData)];
         [self.MyKeychainWrapper writeToKeychain];
         [[NSUserDefaults standardUserDefaults]setBool:true forKey:self.TAG];
@@ -101,7 +101,7 @@ static NSString *const FingerprintDatabaseStateKey = @"FingerprintDatabaseStateK
 
         if(self.TAG && [[NSUserDefaults standardUserDefaults] objectForKey:self.TAG])
         {
-            self.MyKeychainWrapper = [[KeychainWrapper alloc]init];
+            self.MyKeychainWrapper = [[KeychainWrapper alloc] initWithAccount:self.TAG];
             [self.MyKeychainWrapper resetKeychainItem];
         }
 
@@ -122,7 +122,7 @@ static NSString *const FingerprintDatabaseStateKey = @"FingerprintDatabaseStateK
 	 	self.TAG = (NSString*)[command.arguments objectAtIndex:0];
 	  NSString* message = (NSString*)[command.arguments objectAtIndex:1];
     self.laContext = [[LAContext alloc] init];
-    self.MyKeychainWrapper = [[KeychainWrapper alloc]init];
+    self.MyKeychainWrapper = [[KeychainWrapper alloc] initWithAccount:self.TAG];
 
     BOOL hasLoginKey = [[NSUserDefaults standardUserDefaults] boolForKey:self.TAG];
     if(hasLoginKey){
