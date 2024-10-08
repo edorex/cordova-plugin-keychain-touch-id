@@ -141,7 +141,7 @@ static const UInt8 kKeychainItemIdentifier[]    = "com.apple.dts.KeychainUI\0";
     // Default generic data for Keychain Item:
     [_keychainData setObject:@"Item label" forKey:(__bridge id)kSecAttrLabel];
     [_keychainData setObject:@"Item description" forKey:(__bridge id)kSecAttrDescription];
-    [_keychainData setObject:self.userAccount forKey:(__bridge id)kSecAttrAccount];
+    [_keychainData setObject:(self.userAccount ?: @"Account") forKey:(__bridge id)kSecAttrAccount];
     [_keychainData setObject:@"Service" forKey:(__bridge id)kSecAttrService];
     [_keychainData setObject:@"Your comment here." forKey:(__bridge id)kSecAttrComment];
     [_keychainData setObject:@"password" forKey:(__bridge id)kSecValueData];
